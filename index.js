@@ -52,6 +52,25 @@ io.on('connection', (socket) => {
         var content = fs.readFileSync(relativePath, 'utf8');
         callback(returns.success(content));
     });
+
+    socket.on('getPanels', (callback) => {
+        if (!args.checkCallback(callback)) return;
+
+        var panels = fs.readdirSync(path.join(__dirname, 'public', 'panels'));
+        var panelData = [];
+
+        for (var i = 0; i < panels.length; i++) {
+            var panel = panels[i];
+            var panelPath = path.join(__dirname, 'public', 'panels', panel);
+            var data = fs.readFileSync(panelPath, 'utf8');
+            panelData.push({
+                name: panel,
+                data: data
+            });
+        }
+
+        callback(returns.success(panelData));
+    });
 });
 
 server.listen(3002);
