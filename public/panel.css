@@ -1,0 +1,54 @@
+:root {
+    --primary-background-1: #1e1e1e;
+    --primary-background-2: #2e2e2e;
+    --primary-background-3: #3e3e3e;
+    --primary-background-4: #4e4e4e;
+    --primary-background-5: #5e5e5e;
+    
+    --primary-text-1: #ffffff;
+    --primary-text-2: #cccccc;
+    --primary-text-3: #999999;
+    --primary-text-4: #666666;
+    --primary-text-5: #333333;
+
+    --primary-button-background-1: #1e1e1e;
+    --primary-button-background-2: #2e2e2e;
+    --primary-button-background-3: #3e3e3e;
+
+    --primary-button-hover-background-1: #2e2e2e;
+    --primary-button-hover-background-2: #3e3e3e;
+    --primary-button-hover-background-3: #4e4e4e;
+
+    --primary-button-text-1: #ffffff;
+    --primary-button-text-2: #cccccc;
+    --primary-button-text-3: #999999;
+
+    --padding-large: 30px;
+    --padding-medium: 20px;
+    --padding-small: 10px;
+    --padding-tiny: 5px;
+}
+
+.learnplus-panel {
+    position: fixed;
+    background-color: var(--primary-background-1);
+    border: 1px solid var(--primary-background-4);
+    border-radius: 5px;
+    box-shadow: 0 0 5px #000;
+    z-index: 99999;
+    color: var(--primary-text-2);
+}
+
+.learnplus-panel-topbar {
+    height: 40px;
+    border-bottom: 1px solid var(--primary-background-4);
+    display: flex;
+    justify-content: space-between;
+    color: var(--primary-text-1);
+    padding: 20px;
+    padding-bottom: 40px;
+}
+
+.learnplus-button {
+    padding: var(--padding-tiny) var(--padding-small);
+}

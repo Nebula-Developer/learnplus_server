@@ -20,4 +20,7 @@ const io = socketIO(server, {
 const socketAccounts = require('./src/socket/accounts');
 socketAccounts(io);
 
+const socketContent = require('./src/socket/content');
+socketContent(io);
+
 server.listen(3002);
