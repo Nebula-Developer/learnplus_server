@@ -11,6 +11,10 @@ const server = http.createServer(app);
 
 app.use(express.static(__dirname + '/public'));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 const io = socketIO(server, {
     cors: {
         origin: "*",
