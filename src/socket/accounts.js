@@ -7,10 +7,7 @@ function socketHandler(io) {
         socket.on('createAccount', async (data, callback) => {
             if (!args.checkCallback(callback)) return;
 
-            if (!args.checkArgs(data.username, "string", data.password, "string", data.email, "string")) {
-                callback(returns.error("Invalid arguments."));
-                return;
-            }
+            if (!args.checkArgs(data.username, "string", data.password, "string", data.email, "string")) return callback(returns.error("Invalid arguments."));
 
             if (data.username.length < 3 || data.username.length > 16) {
                 callback(returns.error("Username must be between 3 and 16 characters."));
@@ -33,6 +30,18 @@ function socketHandler(io) {
             }
             
             callback(users.createAccount(data.username, data.password, data.email));
+        });
+
+        socket.on('login', async (data, callback) => {
+            if (!args.checkCallback(callback)) return;
+            if (!args.checkArgs(data.username, "string", data.password, "string")) return callback(returns.error("Invalid arguments."));
+            callback(users.loginPassword(data.username, data.password));
+        });
+
+        socket.on('loginToken', async (data, callback) => {
+            if (!args.checkCallback(callback)) return;
+            if (!args.checkArgs(data.token, "string", data.username, "string")) return callback(returns.error("Invalid arguments."));
+            callback(users.loginToken(data.username, data.token));
         });
     });
 }
