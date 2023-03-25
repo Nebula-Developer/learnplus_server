@@ -15,13 +15,17 @@
     --primary-button-background-2: #2e2e2e;
     --primary-button-background-3: #3e3e3e;
 
+    --primary-button-text-1: #ffffff;
+    --primary-button-text-2: #cccccc;
+    --primary-button-text-3: #999999;
+
     --primary-button-hover-background-1: #2e2e2e;
     --primary-button-hover-background-2: #3e3e3e;
     --primary-button-hover-background-3: #4e4e4e;
 
-    --primary-button-text-1: #ffffff;
-    --primary-button-text-2: #cccccc;
-    --primary-button-text-3: #999999;
+    --primary-button-active-background-1: #3e3e3e;
+    --primary-button-active-background-2: #4e4e4e;
+    --primary-button-active-background-3: #5e5e5e;
 
     --padding-large: 30px;
     --padding-medium: 20px;
@@ -45,10 +49,35 @@
     display: flex;
     justify-content: space-between;
     color: var(--primary-text-1);
-    padding: 20px;
-    padding-bottom: 40px;
+    padding: var(--padding-medium);
+    padding-bottom: calc(var(--padding-medium) * 2);
 }
 
-.learnplus-button {
-    padding: var(--padding-tiny) var(--padding-small);
+.learnplus-panel-content {
+    padding: var(--padding-medium);
 }
+
+.learnplus-button-1 {
+    padding: var(--padding-tiny) var(--padding-small);
+    border-radius: 5px;
+    background-color: var(--primary-button-background-1);
+    color: var(--primary-button-text-1);
+    border: 1px solid var(--primary-background-4);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s;
+    width: fit-content;
+}
+
+.learnplus-button-1:hover {
+    background-color: var(--primary-button-hover-background-1);
+}
+
+.learnplus-button-1:active {
+    background-color: var(--primary-button-active-background-1);
+    transition: none;
+}
+
+.learnplus-text-1 { color: var(--primary-text-1); }
+.learnplus-text-2 { color: var(--primary-text-2); }
+.learnplus-text-3 { color: var(--primary-text-3); }
