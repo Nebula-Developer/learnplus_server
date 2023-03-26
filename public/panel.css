@@ -31,14 +31,38 @@
     --padding-medium: 20px;
     --padding-small: 10px;
     --padding-tiny: 5px;
+
+    --panel-resize-duration: 0.25s;
+    --panel-size-resize-duration: 0.25s;
+    --panel-size-appear-duration: 0.35s;
+
+    --panel-resize-border-size: 5px;
 }
 
 .learnplus-wrapper {
     z-index: 99999;
 }
 
+.learnplus-wrapper *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.learnplus-wrapper *::-webkit-scrollbar-track {
+    background: var(--primary-background-1);
+}
+
+.learnplus-wrapper *::-webkit-scrollbar-thumb {
+    background: var(--primary-background-4);
+    border-radius: 5px;
+}
+
+.learnplus-wrapper *::-webkit-scrollbar-corner {
+    background: var(--primary-background-1);
+}
+
 .learnplus-wrapper *:not(i) {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 .learnplus-panel {
@@ -51,7 +75,16 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    transition: filter 0.3s ease, opacity 0.3s ease;
+    transition: filter var(--panel-resize-duration) ease, opacity var(--panel-resize-duration) ease;
+}
+
+.learnplus-panel.learnplus-panel-active {
+    box-shadow: 0 0 5px #000, 0 0 10px #000;
+}
+
+.learnplus-panel.learnplus-panel-closed {
+    pointer-events: none !important;
+    opacity: 0 !important;
 }
 
 .learnplus-panel.learnplus-panel-blur-transition {
@@ -60,7 +93,8 @@
 }
 
 .learnplus-panel-topbar {
-    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
     border-bottom: 1px solid var(--primary-background-4);
     display: flex;
     justify-content: space-between;
@@ -79,6 +113,7 @@
     padding: var(--padding-medium);
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 .learnplus-panel-close {
@@ -101,6 +136,12 @@
     transition: none;
 }
 
+.learnplus-panel-close .learnplus-panel-close-icon {
+    width: 15px;
+    height: 15px;
+    user-select: none;
+}
+
 .learnplus-button-1,
 .learnplus-button-2,
 .learnplus-button-3 {
@@ -109,6 +150,7 @@
     border: 1px solid var(--primary-background-4);
     cursor: pointer;
     user-select: none;
+    font-size: 15px;
     transition: background-color 0.1s;
     width: fit-content;
 }
@@ -141,8 +183,92 @@
     left: 0;
     width: calc(100% - 20px);
     height: calc(100% - 20px);
-    border: 10px solid rgb(145, 167, 255);
-    box-shadow: 0 0 5px #000;
+    border: 10px solid rgba(145, 167, 255, 0.529);
+    box-shadow: 0 0 10px #000;
     z-index: 9999;
-    transition: all 0.25s cubic-bezier(0, 0, 0, 1), opacity 0.5s ease, filter 0.5s ease;
+    opacity: 0;
+    pointer-events: none !important;
+    transition: all var(--panel-size-resize-duration) cubic-bezier(0, 0, 0, 1), opacity var(--panel-size-appear-duration) ease, filter var(--panel-size-appear-duration) ease;
+}
+
+.learnplus-input-1 {
+    border: 1px solid var(--primary-background-4);
+    border-radius: 5px;
+    padding: var(--padding-small);
+    background-color: var(--primary-background-1);
+    color: var(--primary-text-1);
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.1s;
+}
+
+.learnplus-input-1:focus {
+    border-color: var(--primary-background-3);
+}
+
+.learnplus-input-1:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.learnplus-input-1::placeholder {
+    color: var(--primary-background-4);
+}
+
+.learnplus-input-1::-webkit-input-placeholder {
+    color: var(--primary-background-4);
+}
+
+.learnplus-input-1::-moz-placeholder {
+    color: var(--primary-background-4);
+}
+
+.learnplus-input-1:-ms-input-placeholder {
+    color: var(--primary-background-4);
+}
+
+.learnplus-input-1:-moz-placeholder {
+    color: var(--primary-background-4);
+}
+
+.learnplus-text-large { font-size: 24px; }
+.learnplus-text-medium { font-size: 18px; }
+.learnplus-text-small { font-size: 14px; }
+
+.learnplus-mt-5 { margin-top: 5px; } .learnplus-mt-10 { margin-top: 10px; }
+.learnplus-mt-15 { margin-top: 15px; } .learnplus-mt-20 { margin-top: 20px; }
+.learnplus-mt-25 { margin-top: 25px; } .learnplus-mt-30 { margin-top: 30px; }
+.learnplus-mt-35 { margin-top: 35px; } .learnplus-mt-40 { margin-top: 40px; }
+.learnplus-mt-45 { margin-top: 45px; } .learnplus-mt-50 { margin-top: 50px; }
+.learnplus-mt-75 { margin-top: 75px; } .learnplus-mt-100 { margin-top: 100px; }
+.learnplus-mt-125 { margin-top: 125px; } .learnplus-mt-150 { margin-top: 150px; }
+
+.learnplus-text-button-1 {
+    color: var(--primary-text-1);
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+.learnplus-text-button-1:hover {
+    color: var(--primary-text-2);
+}
+
+.learnplus-text-button-2 {
+    color: var(--primary-text-2);
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+.learnplus-text-button-2:hover {
+    color: var(--primary-text-1);
+}
+
+.learnplus-text-button-3 {
+    color: var(--primary-text-3);
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+.learnplus-text-button-3:hover {
+    color: var(--primary-text-2);
 }
