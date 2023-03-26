@@ -77,7 +77,8 @@ function createAccount(username, password, email) {
         },
 
         friends: [],
-        data: {}
+        data: {},
+        channels: []
     };
 
     var t = user.pushToken();
@@ -189,6 +190,15 @@ function modifyAccount(id, data) {
     return returns.success(safeUser(user));
 }
 
+function fromToken(token) {
+    let users = getUsers();
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i];
+        if (user.tokens.includes(token)) return returns.success(user);
+    }
+    return returns.error("Invalid token.");
+}
+
 module.exports = {
     getUser,
     getUsers,
@@ -198,5 +208,7 @@ module.exports = {
     createAccount,
     loginPassword,
     loginToken,
-    modifyAccount
+    modifyAccount,
+    fromToken,
+    writeUsers
 };

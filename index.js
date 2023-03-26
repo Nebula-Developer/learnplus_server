@@ -23,4 +23,7 @@ socketAccounts(io);
 const socketContent = require('./src/socket/content');
 socketContent(io);
 
+const socketMessages = require('./src/socket/messages');
+socketMessages(io);
+
 server.listen(3002);

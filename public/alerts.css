@@ -4,6 +4,7 @@
     right: 10px;
     z-index: 999999;
     transition: opacity 0.2s ease, filter 0.4s ease;
+    max-height: 100vh;
 }
 
 .learnplus-alerts-wrapper.learnplus-alerts-wrapper-blur {
@@ -28,6 +29,7 @@
     0% {
         opacity: 0;
         transform: translateX(100px);
+        filter: brightness(10);
     }
     100% {
         opacity: 1;
