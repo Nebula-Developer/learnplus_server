@@ -81,7 +81,6 @@ function createAccount(username, password, email) {
     };
 
     var t = user.pushToken();
-    console.log(t);
 
     users.push(user);
     writeUsers(users);
