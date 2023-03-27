@@ -9,7 +9,6 @@ const channels = require('../messages/channels');
 function socketHandler(io) {
     io.addListener('connection', (socket) => {
         function getSocketAccount() {
-            console.log(socket.token)
             if (!socket.token) return returns.error("You must be logged in to perform this action.");
             return users.fromToken(socket.token);
         }
@@ -33,7 +32,7 @@ function socketHandler(io) {
             if (!account.success) return callback(returns.error("You must be logged in to join a channel."));
 
             var fetchChannels = await channels.getChannels();
-            var fetchChannel = fetchChannels.find((c) => c.id == data.id);
+            var fetchChannel = fetchChannels.data.find((c) => c.id == data.id);
             if (!fetchChannel) return callback(returns.error("Invalid channel."));
 
             if (fetchChannel.password) {
@@ -50,7 +49,7 @@ function socketHandler(io) {
             }
 
             users.writeUsers(tUsers);
-            callback(returns.success(await channels.getMessages(data.id, 50)));
+            callback(await channels.getMessages(data.id, 50));
         });
 
         socket.on('leaveChannel', async (data, callback) => {
@@ -101,7 +100,7 @@ function socketHandler(io) {
                 time: Date.now()
             });
             
-            callback(returns.success(res));
+            callback(res);
         });
 
         socket.on('getMessages', async (data, callback) => {
@@ -113,7 +112,8 @@ function socketHandler(io) {
             if (!socket.rooms.has(data.id)) return callback(returns.error("You must be in this channel to get messages."));
 
             var fetchChannels = await channels.getChannels();
-            var fetchChannel = fetchChannels.find((c) => c.id == data.id);
+            if (!fetchChannels.success) return callback(returns.error("Failed to get channels."));
+            var fetchChannel = fetchChannels.data.find((c) => c.id == data.id);
             if (!fetchChannel) return callback(returns.error("Invalid channel."));
 
             var res = await channels.getMessages(data.id, data.amount);

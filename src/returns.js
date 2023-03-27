@@ -13,10 +13,20 @@ var success = (data) => {
     };
 };
 
+class Return {
+    /** @type {boolean} */
+    success;
+    /** @type {object} */
+    data;
+    /** @type {string} */
+    error;
+}
+
 module.exports = {
     error,
     success,
     errors: {
         invalidArgs: error("Invalid arguments.")
-    }    
+    },
+    Return
 }
